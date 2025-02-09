@@ -5,7 +5,7 @@ def filter_by_state(operations: list[dict[str, str]], state: str = "EXECUTED") -
     return filtered_operations
 
 
-def sort_by_date(operations: list[dict[str, str]], descending:bool=True) -> list[dict[str, str]]:
+def sort_by_date(operations: list[dict[str, str]], descending: bool = True) -> list[dict[str, str]]:
     """Функция принимает список операций и возвращает отсортированный по дате список. По умолчанию сортировка
     происходит по убыванию, т.е. последняя операция выводится первой"""
     sorted_operations: list[dict[str, str]] = sorted(operations, key=lambda x: x["date"], reverse=descending)
