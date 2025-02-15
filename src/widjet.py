@@ -40,6 +40,7 @@ def get_date(date: str) -> str:
     """Функция принимает дату в формате "2024-03-11T02:26:18.671407"
     и возвращает дату в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""
     date_as_dict: dict = {"year": "", "month": "", "day": ""}
+    transformated_date = None
     if len(date) != 0:
         for char in date:
             if char.isdigit() and len(date_as_dict["year"]) < 4:
