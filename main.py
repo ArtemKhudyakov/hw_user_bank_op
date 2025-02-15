@@ -20,11 +20,16 @@ data = [
     "Visa Gold 5999414228426353",
     "Счет 73654108430135874305",
     "Visa Gold 5999414228426",
-    'fdsf',
-    ''
+    "fdsf",
+    "",
 ]
 
-dates = ["2024-03-11T02:26:18.671407", "2025-12-11T02:26:18.671407", '', 'Error']
+dates = [
+    "2024-03-11T02:26:18.671407",
+    "2025-12-11T02:26:18.671407",
+    "",
+    "Error",
+]
 
 operations_data = [
     {
@@ -53,14 +58,14 @@ for number in data:
     try:
         print(src.widjet.mask_account_card(number))
     except ValueError:
-        print ("Input error")
+        print("Input error")
 
 print()
 for date in dates:
     try:
         print(src.widjet.get_date(date))
     except ValueError:
-        print ("Input error")
+        print("Input error")
 
 print()
 for operation in src.processing.filter_by_state(operations_data):

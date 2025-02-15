@@ -11,7 +11,9 @@ def mask_account_card(input_data: str) -> str:
 
     if len(splited_input_data) > 0:
         if len(splited_input_data[-1]) == 20:
-            masked_acc: str = src.masks.get_mask_account(splited_input_data[-1])
+            masked_acc: str = src.masks.get_mask_account(
+                splited_input_data[-1]
+            )
             splited_masked_acc: list = [
                 i for i in splited_input_data if not i.isdigit()
             ]
@@ -37,7 +39,6 @@ def mask_account_card(input_data: str) -> str:
 def get_date(date: str) -> str:
     """Функция принимает дату в формате "2024-03-11T02:26:18.671407"
     и возвращает дату в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""
-
     date_as_dict: dict = {"year": "", "month": "", "day": ""}
     if len(date) != 0:
         for char in date:
@@ -51,9 +52,11 @@ def get_date(date: str) -> str:
             if not v.isdigit():
                 raise ValueError("Input error")
             else:
-                transformated_date = (
-                    f"{date_as_dict['day']}.{date_as_dict['month']}.{date_as_dict['year']}"
+                transformated_date = str(
+                    f"{date_as_dict['day']}."
+                    f"{date_as_dict['month']}."
+                    f"{date_as_dict['year']}"
                 )
-            return transformated_date
+        return transformated_date
     else:
         raise ValueError("Input error")
