@@ -27,5 +27,9 @@ def get_mask_account(acc_number: str) -> str:
     """Функция принимает на вход номер счета в виде строки и возвращает его маску.
     Номер счета замаскирован и отображается в формате **XXXX, где X — это цифра номера.
     То есть видны только последние 4 цифры номера, а перед ними — две звездочки"""
-    masked_acc_number = "**" + acc_number[(len(acc_number) - 4) : (len(acc_number) + 1)]
-    return masked_acc_number
+    if acc_number.isdigit() == True and len(acc_number) == 20:
+        masked_acc_number = "**" + acc_number[(len(acc_number) - 4) : (len(acc_number) + 1)]
+        return masked_acc_number
+    else:
+        raise ValueError('Неверный формат номера счета')
+
