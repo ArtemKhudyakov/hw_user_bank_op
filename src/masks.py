@@ -1,18 +1,24 @@
+from unicodedata import digit
+
+
 def get_mask_card_number(card_number: str) -> str:
     """Функция принимает номер банковской карты в виде строки без пробелов, возвращает
     маскированный номер карты в формате XXXX XX** **** XXXX"""
-    card_number_as_list = [i for i in card_number]
-    for i in range(6, 12):
-        card_number_as_list[i] = "*"
-    masked_card_number = (
-        "".join(card_number_as_list[0:4])
-        + " "
-        + "".join(card_number_as_list[4:8])
-        + " "
-        + "".join(card_number_as_list[8:12])
-        + " "
-        + "".join(card_number_as_list[12:16])
-    )
+    if card_number.isdigit() == True and len(card_number) == 16:
+        card_number_as_list = [i for i in card_number]
+        for i in range(6, 12):
+            card_number_as_list[i] = "*"
+        masked_card_number = (
+            "".join(card_number_as_list[0:4])
+            + " "
+            + "".join(card_number_as_list[4:8])
+            + " "
+            + "".join(card_number_as_list[8:12])
+            + " "
+            + "".join(card_number_as_list[12:16])
+        )
+    else:
+        raise ValueError('Неверный формат номера карты')
 
     return masked_card_number
 
