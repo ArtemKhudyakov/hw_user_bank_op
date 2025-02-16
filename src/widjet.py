@@ -36,7 +36,7 @@ def mask_account_card(input_data: str) -> str:
         raise ValueError("Input error")
 
 
-def get_date(date: str) -> str:
+def get_date(date: str) -> str | None:
     """Функция принимает дату в формате "2024-03-11T02:26:18.671407"
     и возвращает дату в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""
     date_as_dict: dict = {"year": "", "month": "", "day": ""}

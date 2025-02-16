@@ -1,5 +1,3 @@
-from tarfile import EmptyHeaderError
-
 import src.masks
 import src.processing
 import src.widjet
@@ -56,7 +54,6 @@ operations_data = [
     },
 ]
 
-empty_operations_data = []
 
 for number in data:
     try:
@@ -81,14 +78,6 @@ try:
             print("Input error")
 except ValueError:
     print("Input error")
-
-print()
-
-try:
-    for operation in src.processing.filter_by_state(empty_operations_data):
-        print(operation)
-except ValueError:
-    print("Список операций пуст")
 
 print()
 
