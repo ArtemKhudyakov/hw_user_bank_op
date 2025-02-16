@@ -108,9 +108,14 @@
 ### Установка
 
 Для установки фрэймворка pytest введите в терминале:
-`poetry add --group lint black mypy flake8 isort`
+`poetry add --group dev pytest`
+Для вывода отчета по тестированию установите библиотеку pytest-cov.
+В терминале введите:
+`poetry add --group dev pytest-cov`
 
 ### Запуск тестирования
 
 Для запуска тестирования в терминале введите команду:
 `pytest`
+Для формирования HTML отчета о покрытии тестами в терминале введите команду:
+`pytest --cov=src --cov-report=html`
