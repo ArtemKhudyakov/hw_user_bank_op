@@ -1,3 +1,5 @@
+from tarfile import EmptyHeaderError
+
 import src.masks
 import src.processing
 import src.widjet
@@ -54,6 +56,8 @@ operations_data = [
     },
 ]
 
+empty_operations_data = []
+
 for number in data:
     try:
         print(src.widjet.mask_account_card(number))
@@ -68,9 +72,26 @@ for date in dates:
         print("Input error")
 
 print()
-for operation in src.processing.filter_by_state(operations_data):
-    print(operation)
+
+try:
+    for operation in src.processing.filter_by_state(operations_data):
+        try:
+            print(operation)
+        except ValueError:
+            print("Input error")
+except ValueError:
+    print("Input error")
+
 print()
+
+try:
+    for operation in src.processing.filter_by_state(empty_operations_data):
+        print(operation)
+except ValueError:
+    print("Список операций пуст")
+
+print()
+
 sorted_operations = src.processing.sort_by_date(operations_data)
 for operation in sorted_operations:
     print(operation)
