@@ -1,4 +1,4 @@
-from typing import Callable, Collection, Iterator
+from typing import Callable, Collection, Iterator, Any
 
 # from typing import TypeGuard
 # from typing import Any
@@ -78,7 +78,7 @@ def filter_by_currency(
     if len(transactions) == 0:
         raise ValueError("Список транзакций пуст")
     else:
-        filtered_transaction: Callable[[dict[str, Collection[str]]],] = filter(
+        filtered_transaction: Iterator[dict[str, Collection[Any]]] = filter(
             lambda x: x["operationAmount"]["currency"]["code"] == currency,
             transactions,
         )
@@ -98,16 +98,13 @@ def transaction_descriptions(
             yield transactions[i]["description"]
 
 
-# Создайте генератор card_number_generator, который выдает номера банковских
-# карт в формате XXXX XXXX XXXX XXXX, где X — цифра номера карты. Генератор
-# может сгенерировать номера карт в заданном диапазоне от
-# 0000 0000 0000 0001 до 9999 9999 9999 9999. Генератор должен принимать
-# начальное и конечное значения для генерации диапазона номеров.
-
-
 def card_number_generator(
     start: int = 1, stop: int = 9999999999999998
 ) -> Iterator[str]:
+    """Генератор номера карты, который выдает номера банковских
+    карт в формате XXXX XXXX XXXX XXXX, где X — цифра номера карты. Генератор
+    может сгенерировать номера карт в заданном диапазоне от
+    0000 0000 0000 0001 до 9999 9999 9999 9999."""
     for i in range(start, stop + 1):
         number = i
         card_number = "".join(
