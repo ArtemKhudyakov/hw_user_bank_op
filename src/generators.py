@@ -1,4 +1,4 @@
-from typing import Callable, Collection, Iterator, Any
+from typing import Any, Collection, Iterator
 
 # from typing import TypeGuard
 # from typing import Any
