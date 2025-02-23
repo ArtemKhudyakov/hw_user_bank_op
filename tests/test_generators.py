@@ -95,3 +95,41 @@ def test_transaction_descriptions_with_filter_eur(
     filtered_descriptions = gen.transaction_descriptions(list(filtered))
     with pytest.raises(ValueError):
         assert list(filtered_descriptions)
+
+
+def test_card_number_generator_1(start: int = 1, stop: int = 10) -> None:
+    card_number = gen.card_number_generator(start, stop)
+    assert next(card_number) == "0000 0000 0000 0001"
+    assert next(card_number) == "0000 0000 0000 0002"
+    assert next(card_number) == "0000 0000 0000 0003"
+    assert next(card_number) == "0000 0000 0000 0004"
+    assert next(card_number) == "0000 0000 0000 0005"
+    assert next(card_number) == "0000 0000 0000 0006"
+
+
+def test_card_number_generator_2(
+    start: int = 100000000000, stop: int = 100000000005
+) -> None:
+    card_number = gen.card_number_generator(start, stop)
+    assert next(card_number) == "0000 1000 0000 0000"
+    assert next(card_number) == "0000 1000 0000 0001"
+    assert next(card_number) == "0000 1000 0000 0002"
+    assert next(card_number) == "0000 1000 0000 0003"
+    assert next(card_number) == "0000 1000 0000 0004"
+    assert next(card_number) == "0000 1000 0000 0005"
+
+
+def test_card_number_generator_3(start: int = 0, stop: int = 0) -> None:
+    card_number = gen.card_number_generator(start, stop)
+    assert next(card_number) == "0000 0000 0000 0000"
+
+
+def test_card_number_generator_4(start: int = 1, stop: int = 5) -> None:
+    card_number = gen.card_number_generator(start, stop)
+    assert list(card_number) == [
+        "0000 0000 0000 0001",
+        "0000 0000 0000 0002",
+        "0000 0000 0000 0003",
+        "0000 0000 0000 0004",
+        "0000 0000 0000 0005",
+    ]

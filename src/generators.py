@@ -96,3 +96,33 @@ def transaction_descriptions(
     else:
         for i in range(len(transactions)):
             yield transactions[i]["description"]
+
+
+# Создайте генератор card_number_generator, который выдает номера банковских
+# карт в формате XXXX XXXX XXXX XXXX, где X — цифра номера карты. Генератор
+# может сгенерировать номера карт в заданном диапазоне от
+# 0000 0000 0000 0001 до 9999 9999 9999 9999. Генератор должен принимать
+# начальное и конечное значения для генерации диапазона номеров.
+
+
+def card_number_generator(
+    start: int = 1, stop: int = 9999999999999998
+) -> Iterator[str]:
+    for i in range(start, stop + 1):
+        number = i
+        card_number = "".join(
+            ([i for i in str(number)[::-1] + "0" * (16 - len(str(number)))])[
+                ::-1
+            ]
+        )
+        card_number = (
+            card_number[0:4]
+            + " "
+            + card_number[4:8]
+            + " "
+            + card_number[8:12]
+            + " "
+            + card_number[12:]
+        )
+        yield card_number
+        number += 1

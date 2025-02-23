@@ -155,21 +155,11 @@ transactions = [
 #     print(operation)
 #
 #
-# try:
-#     currency = 'USD'
-#     usd_transactions = filter_by_currency(transactions, currency)
-#     if list(usd_transactions) == []:
-#         print('Транзакции в данной валюте не производились')
-#     else:
-#         usd_transactions = filter_by_currency(transactions, currency)
-#         print(list(usd_transactions))
-# except ValueError:
-#     print('Список транзакций пуст')
-#
-# print('####')
+
 
 currency = input("Введите валюту для фильтрации (RUB, USD, EUR)").upper()
 
+print("Проверка filter_by_currency")
 try:
     usd_transactions = gen.filter_by_currency(transactions, currency)
     if not list(usd_transactions):
@@ -181,6 +171,7 @@ except ValueError:
     print("Список транзакций пуст")
 
 print("####")
+print("Проверка filter_by_currency, если список пустой")
 
 try:
     usd_transactions = gen.filter_by_currency([])
@@ -193,6 +184,7 @@ except ValueError:
     print("Список транзакций пуст")
 
 print("#####")
+print("Проверка transaction_descriptions")
 
 try:
     description = gen.transaction_descriptions(transactions)
@@ -205,6 +197,11 @@ except ValueError:
     print("Список транзакций пуст")
 
 print("####")
+print(
+    "Проверка transaction_descriptions после фильтрации"
+    " функцией filter_by_currency"
+)
+
 try:
     filtered = gen.filter_by_currency(transactions, currency)
     filtered_descriptions = gen.transaction_descriptions(list(filtered))
@@ -215,3 +212,13 @@ except StopIteration:
 
 except ValueError:
     print("Список транзакций пуст")
+
+print("####")
+print("Проверка card_number_generator")
+
+card_numbers = gen.card_number_generator(1, 5)
+try:
+    for i in range(1000000):
+        print(next(card_numbers))
+except StopIteration:
+    print("Хватит уже")
