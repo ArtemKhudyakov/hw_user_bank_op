@@ -4,8 +4,8 @@ import src.generators as gen
 
 
 def test_filter_by_currency_usd(
-    list_of_transactions: list[dict[str, Collection[str]]],
-    currency: str = "USD",
+        list_of_transactions: list[dict[str, Collection[str]]],
+        currency: str = "USD",
 ) -> None:
     """Тестирование функции filter_by_currency, фильтрация по валюте USD
     тестирование через next"""
@@ -19,9 +19,9 @@ def test_filter_by_currency_usd(
 
 
 def test_filter_by_currency_all(
-    list_of_transactions: list[dict[str, Collection[str]]],
-    transactions_by_usd: list[dict[str, Collection[str]]],
-    currency: str = "USD",
+        list_of_transactions: list[dict[str, Collection[str]]],
+        transactions_by_usd: list[dict[str, Collection[str]]],
+        currency: str = "USD",
 ) -> None:
     """Тестирование функции filter_by_currency по валюте USD, тестирование
     через список"""
@@ -32,9 +32,9 @@ def test_filter_by_currency_all(
 
 
 def test_filter_by_currency_rub(
-    list_of_transactions: list[dict[str, Collection[str]]],
-    transactions_by_rub: list[dict[str, Collection[str]]],
-    currency: str = "RUB",
+        list_of_transactions: list[dict[str, Collection[str]]],
+        transactions_by_rub: list[dict[str, Collection[str]]],
+        currency: str = "RUB",
 ) -> None:
     """Тестирование функции filter_by_currency по валюте RUB, тестирование
         через список"""
@@ -45,7 +45,7 @@ def test_filter_by_currency_rub(
 
 
 def test_filter_by_currency_empty(
-    transactions: list = [], currency: str = "USD"
+        transactions: list = [], currency: str = "USD"
 ) -> None:
     """Тестирование функции filter_by_currency по валюте, тестирование
             пустого списка"""
@@ -54,8 +54,8 @@ def test_filter_by_currency_empty(
 
 
 def test_filter_by_currency_without_usd(
-    transactions_by_rub: list[dict[str, Collection[str]]],
-    currency: str = "USD",
+        transactions_by_rub: list[dict[str, Collection[str]]],
+        currency: str = "USD",
 ) -> None:
     """Тестирование функции filter_by_currency по валюте USD, тестирование
             списка транзакций, не содержащего операций в USD"""
@@ -63,8 +63,8 @@ def test_filter_by_currency_without_usd(
 
 
 def test_filter_by_currency_eur(
-    list_of_transactions: list[dict[str, Collection[str]]],
-    currency: str = "EUR",
+        list_of_transactions: list[dict[str, Collection[str]]],
+        currency: str = "EUR",
 ) -> None:
     """Тестирование функции filter_by_currency по валюте EUR, тестирование
                 списка транзакций, не содержащего операций в EUR"""
@@ -72,7 +72,7 @@ def test_filter_by_currency_eur(
 
 
 def test_transaction_descriptions(
-    list_of_transactions: list[dict[str, Collection[str]]],
+        list_of_transactions: list[dict[str, Collection[str]]],
 ) -> None:
     """Тестирование функции transaction_descriptions, тестирование через next"""
     description = gen.transaction_descriptions(list_of_transactions)
@@ -90,7 +90,7 @@ def test_transaction_descriptions_empty(transactions: list = []) -> None:
 
 
 def test_transaction_descriptions_with_filter_rub(
-    list_of_transactions: list[dict[str, Collection[str]]],
+        list_of_transactions: list[dict[str, Collection[str]]],
 ) -> None:
     """Тестирование функции transaction_descriptions, после фильтрации по валюте RUB"""
     filtered = gen.filter_by_currency(list_of_transactions, "RUB")
@@ -102,7 +102,7 @@ def test_transaction_descriptions_with_filter_rub(
 
 
 def test_transaction_descriptions_with_filter_eur(
-    list_of_transactions: list[dict[str, Collection[str]]],
+        list_of_transactions: list[dict[str, Collection[str]]],
 
 ) -> None:
     """Тестирование функции transaction_descriptions, после фильтрации по валюте EUR, если в отфильтрованном списке нет операций"""
@@ -124,7 +124,7 @@ def test_card_number_generator_1(start: int = 1, stop: int = 10) -> None:
 
 
 def test_card_number_generator_2(
-    start: int = 100000000000, stop: int = 100000000005
+        start: int = 100000000000, stop: int = 100000000005
 ) -> None:
     """Тестирование функции card_number_generator, следующих 5 номеров после номера 100000000000"""
     card_number = gen.card_number_generator(start, stop)
@@ -152,3 +152,12 @@ def test_card_number_generator_4(start: int = 1, stop: int = 5) -> None:
         "0000 0000 0000 0004",
         "0000 0000 0000 0005",
     ]
+
+
+@pytest.mark.parametrize("value, expected", [(1, "0000 0000 0000 0001"),
+                                             (2, "0000 0000 0000 0002"),
+                                             (3, "0000 0000 0000 0003"),
+                                             (1000, "0000 0000 0000 1000")])
+def test_card_number_generator_5(value, expected) -> None:
+    card_number_list = list(gen.card_number_generator(1, 1005))
+    assert card_number_list[value - 1] == expected

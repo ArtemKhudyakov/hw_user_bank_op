@@ -218,7 +218,7 @@ print("Проверка card_number_generator")
 
 card_numbers = gen.card_number_generator(1, 5)
 try:
-    for i in range(1000000):
+    for i in range(10):
         print(next(card_numbers))
 except StopIteration:
     print("Хватит уже")
