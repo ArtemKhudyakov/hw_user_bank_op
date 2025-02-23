@@ -172,7 +172,7 @@ currency = input("Введите валюту для фильтрации (RUB, 
 
 try:
     usd_transactions = gen.filter_by_currency(transactions, currency)
-    if list(usd_transactions) == []:
+    if not list(usd_transactions):
         print("Транзакции в данной валюте не производились")
     else:
         usd_transactions = gen.filter_by_currency(transactions, currency)
@@ -184,7 +184,7 @@ print("####")
 
 try:
     usd_transactions = gen.filter_by_currency([])
-    if list(usd_transactions) == []:
+    if not list(usd_transactions):
         print("Транзакции в данной валюте не производились")
     else:
         usd_transactions = gen.filter_by_currency([])
@@ -208,7 +208,10 @@ print("####")
 try:
     filtered = gen.filter_by_currency(transactions, currency)
     filtered_descriptions = gen.transaction_descriptions(list(filtered))
-    for description in filtered_descriptions:
-        print(description)
+    for _ in range(len(list(gen.filter_by_currency(transactions, currency)))):
+        print(next(filtered_descriptions))
+except StopIteration:
+    print("Транзакции закончились")
+
 except ValueError:
     print("Список транзакций пуст")
