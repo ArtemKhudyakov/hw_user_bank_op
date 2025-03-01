@@ -1,3 +1,6 @@
+import src.decorators as decorators
+
+@decorators.log('logs/my_log.txt')
 def filter_by_state(
     operations: list[dict[str, str]], state: str = "EXECUTED"
 ) -> list[dict[str, str]]:
@@ -19,6 +22,7 @@ def filter_by_state(
         raise ValueError("Список операций пуст")
 
 
+@decorators.log('logs/my_log.txt')
 def sort_by_date(
     operations: list[dict[str, str]], descending: bool = True
 ) -> list[dict[str, str]]:
