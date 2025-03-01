@@ -11,7 +11,6 @@ def log(file_name=None):
             end_time_epoch = t.time()
             end_time = t.asctime(t.localtime())
             total_time = end_time_epoch - start_time_epoch
-
             try:
                 result = func(*args, **kwargs)
                 log_message = f'''

@@ -15,7 +15,7 @@ def mask_account_card(input_data: str) -> str:
 
     if len(splited_input_data) > 0:
         if len(splited_input_data[-1]) == 20:
-            masked_acc: str = src.masks.get_mask_account(
+            masked_acc: str = src.masks.get_mask_account.__wrapped__(
                 splited_input_data[-1]
             )
             splited_masked_acc: list = [
@@ -25,7 +25,7 @@ def mask_account_card(input_data: str) -> str:
             return " ".join(splited_masked_acc)
 
         elif len(splited_input_data[-1]) == 16:
-            masked_card: str = src.masks.get_mask_card_number(
+            masked_card: str = src.masks.get_mask_card_number.__wrapped__(
                 splited_input_data[-1]
             )
             splited_masked_card: list = [

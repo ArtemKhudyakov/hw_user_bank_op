@@ -10,18 +10,18 @@ def test_get_mask_card_number() -> None:
     больше 16 должна выводится ошибка ввода. При правильном вводе функция
     должна выводить номер карты в формате XXXX XX** **** XXXX"""
     assert (
-        masks.get_mask_card_number("1111111111111111") == "1111 11** **** 1111"
+        masks.get_mask_card_number.__wrapped__("1111111111111111") == "1111 11** **** 1111"
     )
     with pytest.raises(ValueError):
-        assert masks.get_mask_card_number("")
+        assert masks.get_mask_card_number.__wrapped__("")
     with pytest.raises(ValueError):
         assert (
-            masks.get_mask_card_number("1111")
+            masks.get_mask_card_number.__wrapped__("1111")
             == "Неверный формат номера карты"
         )
     with pytest.raises(ValueError):
         assert (
-            masks.get_mask_card_number("qqqqqqqqqqqqqqqq")
+            masks.get_mask_card_number.__wrapped__("qqqqqqqqqqqqqqqq")
             == "Неверный формат номера карты"
         )
 
@@ -43,7 +43,7 @@ def test_get_mask_account(value: str, expected: str) -> None:
     больше 20 должна выводится ошибка ввода. При правильном вводе функция
     должна выводить номер карты в формате **XXXX"""
     if value.isdigit() and len(value) == 20:
-        assert masks.get_mask_account(value) == expected
+        assert masks.get_mask_account.__wrapped__(value) == expected
     else:
         with pytest.raises(ValueError):
-            assert masks.get_mask_account(value)
+            assert masks.get_mask_account.__wrapped__(value)

@@ -119,11 +119,11 @@ transactions = [
 ]
 
 
-for number in data:
-    try:
-        print(src.widjet.mask_account_card(number))
-    except ValueError:
-        print("Input error")
+# for number in data:
+#     try:
+#         print(src.widjet.mask_account_card(number))
+#     except ValueError:
+#         print("Input error")
 
 
 
@@ -159,8 +159,8 @@ for number in data:
 #
 
 
-# currency = input("Введите валюту для фильтрации (RUB, USD, EUR)").upper()
-#
+currency = input("Введите валюту для фильтрации (RUB, USD, EUR)").upper()
+
 # print("Проверка filter_by_currency")
 # try:
 #     usd_transactions = gen.filter_by_currency(transactions, currency)
@@ -172,18 +172,18 @@ for number in data:
 # except ValueError:
 #     print("Список транзакций пуст")
 #
-# print("####")
-# print("Проверка filter_by_currency, если список пустой")
-#
-# try:
-#     usd_transactions = gen.filter_by_currency([])
-#     if not list(usd_transactions):
-#         print("Транзакции в данной валюте не производились")
-#     else:
-#         usd_transactions = gen.filter_by_currency([])
-#         print(list(usd_transactions))
-# except ValueError:
-#     print("Список транзакций пуст")
+print("####")
+print("Проверка filter_by_currency, если список пустой")
+
+try:
+    usd_transactions = gen.filter_by_currency([])
+    if not list(usd_transactions):
+        print("Транзакции в данной валюте не производились")
+    else:
+        usd_transactions = gen.filter_by_currency([])
+        print(list(usd_transactions))
+except ValueError:
+    print("Список транзакций пуст")
 #
 # print("#####")
 # print("Проверка transaction_descriptions")

@@ -30,13 +30,13 @@ def test_mask_account_card(value: str, expected: str) -> None:
     """
     if len(value) != 0:
         if len(value.split()[-1]) == 16 or len(value.split()[-1]) == 20:
-            assert widjet.mask_account_card(value) == expected
+            assert widjet.mask_account_card.__wrapped__(value) == expected
         else:
             with pytest.raises(ValueError):
-                assert widjet.mask_account_card(value) == expected
+                assert widjet.mask_account_card.__wrapped__(value) == expected
     else:
         with pytest.raises(ValueError):
-            assert widjet.mask_account_card(value) == expected
+            assert widjet.mask_account_card.__wrapped__(value) == expected
 
 
 date_for_testing = [
@@ -53,10 +53,10 @@ def test_get_date(value: str, expected: str) -> None:
     и возвращать дату в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""
     if value == "Error":
         with pytest.raises(ValueError):
-            assert widjet.get_date("Error")
+            assert widjet.get_date.__wrapped__("Error")
     else:
         if len(value) > 0:
-            assert widjet.get_date(value) == expected
+            assert widjet.get_date.__wrapped__(value) == expected
         else:
             with pytest.raises(ValueError):
-                assert widjet.get_date(value)
+                assert widjet.get_date.__wrapped__(value)
