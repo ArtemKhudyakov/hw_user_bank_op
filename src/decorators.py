@@ -6,33 +6,49 @@ def log(file_name=None):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
+            log_message = []
+            execution_message = []
             start_time_epoch = t.time()
             start_time = t.asctime(t.localtime())
-            end_time_epoch = t.time()
-            end_time = t.asctime(t.localtime())
-            total_time = end_time_epoch - start_time_epoch
+            log_message.append(f'''
+            ##########################
+Функция {func.__name__}
+Время начала выполнения {start_time}\n''')
             try:
                 result = func(*args, **kwargs)
-                log_message = f'''
-Функция {func.__name__}
-начало выполнения функции: {start_time}
-Конец выполнения функции: {end_time}
-Затраченное время: {total_time}
-Результат выполнения функции: {result}
-'''
+                if type(result) is str or type(result) is int or type(
+                        result) is float or type(result) is list or type(
+                    result) is tuple or type(result) is dict:
+                    execution_message.append(f'Функция {func.__name__} '
+                                             f'успешно выполнена.\n'
+                                             f'Результат: {result}\n')
+                else:
+                    result_list = [x for i, x in
+                                   enumerate(func(*args, **kwargs)) if i < 10]
+                    if len(result_list) == 10:
+                        result_list.append('и т.д.')
+                    execution_message.append(f'Функция {func.__name__} '
+                                             f'успешно выполнена.\n'
+                                             f'Результат: {result_list}\n')
                 return result
             except Exception as e:
                 error_type = type(e).__name__
-                log_message = f'''
-Функция {func.__name__} выполнена с ОШИБКОЙ!
-Ошибка: {error_type}
-Inputs: {args}, {kwargs}
-'''
+                execution_message.append(f'ОШИБКА!!!\nОшибка: {error_type}\n'
+                                         f'Inputs: {args}, {kwargs}')
                 raise
             finally:
+                end_time_epoch = t.time()
+                end_time = t.asctime(t.localtime())
+                total_time = end_time_epoch - start_time_epoch
+                end_log_message=[f'Время Завершения {func.__name__}'
+                                       f'{end_time}\n'
+                                       f'Время выполнения {total_time}\n']
+                final_log_message = ''.join(
+                    log_message + execution_message + end_log_message)
                 if file_name:
                     with open(file_name, 'a', encoding='utf-8') as file:
-                        file.write(log_message)
-                else: print(log_message)
+                        file.write(final_log_message)
+                else:
+                    print(log_message)
         return wrapper
     return decorator

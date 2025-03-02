@@ -66,7 +66,6 @@ import src.decorators as decorators
 #         "to": "Счет 14211924144426031657",
 #     },
 # ]
-
 @decorators.log('logs/my_log.txt')
 def filter_by_currency(
     transactions: list[dict[str, Collection[str]]], currency: str = "USD"
