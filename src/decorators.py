@@ -7,8 +7,9 @@ F = TypeVar("F", bound=Callable[..., Any])
 
 def log(file_name: Optional[str] = None) -> Callable[[F], F]:
     """Декоратор log, который регистрирует детали выполнения функций, такие
-как время вызова, имя функции, передаваемые аргументы, результат выполнения и
-информация об ошибках, время, затраченное на выполнение функции."""
+    как время вызова, имя функции, передаваемые аргументы, результат выполнения и
+    информация об ошибках, время, затраченное на выполнение функции."""
+
     def decorator(func: F) -> F:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
@@ -17,20 +18,20 @@ def log(file_name: Optional[str] = None) -> Callable[[F], F]:
             start_time_epoch = t.time()
             start_time = t.asctime(t.localtime())
             start_message.append(
-                f"""
-        ##########################
-Функция {func.__name__}
-Время начала выполнения {start_time}\n"""
+                f"\n"
+                f"        ##########################\n"
+                f"Функция {func.__name__}\n"
+                f"Время начала выполнения {start_time}\n"
             )
             try:
                 result = func(*args, **kwargs)
                 if (
-                        type(result) is str
-                        or type(result) is int
-                        or type(result) is float
-                        or type(result) is list
-                        or type(result) is tuple
-                        or type(result) is dict
+                    type(result) is str
+                    or type(result) is int
+                    or type(result) is float
+                    or type(result) is list
+                    or type(result) is tuple
+                    or type(result) is dict
                 ):
                     execution_message.append(
                         f"Функция {func.__name__} "
@@ -77,4 +78,5 @@ def log(file_name: Optional[str] = None) -> Callable[[F], F]:
                     print(final_log_message)
 
         return wrapper
+
     return decorator

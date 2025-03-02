@@ -38,14 +38,15 @@ def test_dec_log_capsys(capsys):
     start_time = t.asctime(t.localtime())
     hello_world()
     end_time = t.asctime(t.localtime())
-    log = (f"\n"
-           "        ##########################\n"
-           "Функция hello_world\n"
-           f"Время начала выполнения {start_time}\n"
-           "Функция hello_world успешно выполнена.\n"
-           "Результат: Hello, World!\n"
-           f"Время Завершения hello_world {end_time}"
-           )
+    log = (
+        f"\n"
+        "        ##########################\n"
+        "Функция hello_world\n"
+        f"Время начала выполнения {start_time}\n"
+        "Функция hello_world успешно выполнена.\n"
+        "Результат: Hello, World!\n"
+        f"Время Завершения hello_world {end_time}"
+    )
 
     captured = capsys.readouterr()
     captured_text = captured.out
@@ -55,6 +56,7 @@ def test_dec_log_capsys(capsys):
 def test_dec_log_into_file():
     """Тест, что декоратор записывает лог в указанный файл"""
     with tmp.TemporaryDirectory() as tmp_dir:
+
         @decorators.log(f"{tmp_dir}/test_log_tmp.txt")
         def hello_world():
             return "Hello, World!"
