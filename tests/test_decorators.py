@@ -8,6 +8,7 @@ import src.decorators as decorators
 
 def test_dec_log_1():
     """Тест, что декоратор не меняет результат функции"""
+
     @decorators.log(None)
     def division(x=10, y=2):
         return x / y
@@ -18,6 +19,7 @@ def test_dec_log_1():
 
 def test_dec_log_error():
     """Тест, что декоратор выбрасывает ошибку"""
+
     @decorators.log(None)
     def division(x=10, y=0):
         return x / y
@@ -28,6 +30,7 @@ def test_dec_log_error():
 
 def test_dec_log_capsys(capsys):
     """Тест, что декоратор верно записывает лог"""
+
     @decorators.log(None)
     def hello_world():
         return "Hello, World!"
@@ -36,13 +39,13 @@ def test_dec_log_capsys(capsys):
     hello_world()
     end_time = t.asctime(t.localtime())
     log = (f"\n"
-"        ##########################\n"
-"Функция hello_world\n"
-f"Время начала выполнения {start_time}\n"
-"Функция hello_world успешно выполнена.\n"
-"Результат: Hello, World!\n"
-f"Время Завершения hello_world {end_time}"
-    )
+           "        ##########################\n"
+           "Функция hello_world\n"
+           f"Время начала выполнения {start_time}\n"
+           "Функция hello_world успешно выполнена.\n"
+           "Результат: Hello, World!\n"
+           f"Время Завершения hello_world {end_time}"
+           )
 
     captured = capsys.readouterr()
     captured_text = captured.out
@@ -52,7 +55,6 @@ f"Время Завершения hello_world {end_time}"
 def test_dec_log_into_file():
     """Тест, что декоратор записывает лог в указанный файл"""
     with tmp.TemporaryDirectory() as tmp_dir:
-
         @decorators.log(f"{tmp_dir}/test_log_tmp.txt")
         def hello_world():
             return "Hello, World!"

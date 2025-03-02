@@ -77,6 +77,4 @@ def log(file_name: Optional[str] = None) -> Callable[[F], F]:
                     print(final_log_message)
 
         return wrapper
-
-
     return decorator
