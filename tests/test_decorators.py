@@ -1,6 +1,9 @@
-import src.decorators as decorators
-import pytest
+import tempfile as tmp
 import time as t
+
+import pytest
+
+import src.decorators as decorators
 
 
 def test_dec_log_1():
@@ -24,22 +27,35 @@ def test_dec_log_error():
 def test_dec_log_capsys(capsys):
     @decorators.log(None)
     def hello_world():
-        return 'Hello, World!'
+        return "Hello, World!"
+
     start_time = t.asctime(t.localtime())
-    start_time_epoch = t.time()
-    result = hello_world()
+    hello_world()
     end_time = t.asctime(t.localtime())
-    end_time_epoch = t.time()
-    total_time = end_time_epoch - start_time_epoch
-    log = (f'\n'
- '            ##########################\n'
- 'Функция hello_world\n'
- f'Время начала выполнения {start_time}\n'
- 'Функция hello_world успешно выполнена.\n'
- 'Результат: Hello, World!\n'
- f'Время Завершения hello_world {end_time}')
+    log = (
+        f"\n"
+        "            ##########################\n"
+        "Функция hello_world\n"
+        f"Время начала выполнения {start_time}\n"
+        "Функция hello_world успешно выполнена.\n"
+        "Результат: Hello, World!\n"
+        f"Время Завершения hello_world {end_time}"
+    )
 
     captured = capsys.readouterr()
     captured_text = captured.out
-    assert captured_text.split('\n')[:-3] == log.split('\n')
+    assert captured_text.split("\n")[:-3] == log.split("\n")
 
+
+def test_dec_log_into_file():
+    with tmp.TemporaryDirectory() as tmp_dir:
+
+        @decorators.log(f"{tmp_dir}/test_log_tmp.txt")
+        def hello_world():
+            return "Hello, World!"
+
+        hello_world()
+        with open(f"{tmp_dir}/test_log_tmp.txt", "r", encoding="utf-8") as f:
+            lines = f.readlines()
+            print(tmp_dir + "/test_log_tmp.txt")
+            assert "Время начала выполнения" in lines[3:4][0]
