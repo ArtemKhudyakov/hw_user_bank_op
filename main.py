@@ -1,6 +1,6 @@
-import src.masks
-import src.processing
-import src.widjet
+# import src.masks
+# import src.processing
+# import src.widjet
 import src.generators as gen
 
 # card_number: str = str(7000792289606361)
@@ -125,8 +125,6 @@ transactions = [
 #     except ValueError:
 #         print("Input error")
 
-
-
 # print()
 # for date in dates:
 #     try:
@@ -225,5 +223,3 @@ except ValueError:
 #         print(next(card_numbers))
 # except StopIteration:
 #     print("Хватит уже")
-
-

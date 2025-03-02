@@ -1,7 +1,7 @@
 import src.decorators as decorators
 
 
-@decorators.log('logs/my_log.txt')
+@decorators.log("logs/my_log.txt")
 def mask_account_card(input_data: str) -> str:
     """Функция принимает номер счет в формате
     "Счет 73654108430135874305" или номер карты в формате
@@ -40,7 +40,7 @@ def mask_account_card(input_data: str) -> str:
         raise ValueError("Input error")
 
 
-@decorators.log('logs/my_log.txt')
+@decorators.log("logs/my_log.txt")
 def get_date(date: str) -> str | None:
     """Функция принимает дату в формате "2024-03-11T02:26:18.671407"
     и возвращает дату в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""

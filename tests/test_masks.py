@@ -10,7 +10,8 @@ def test_get_mask_card_number() -> None:
     больше 16 должна выводится ошибка ввода. При правильном вводе функция
     должна выводить номер карты в формате XXXX XX** **** XXXX"""
     assert (
-        masks.get_mask_card_number.__wrapped__("1111111111111111") == "1111 11** **** 1111"
+        masks.get_mask_card_number.__wrapped__("1111111111111111")
+        == "1111 11** **** 1111"
     )
     with pytest.raises(ValueError):
         assert masks.get_mask_card_number.__wrapped__("")

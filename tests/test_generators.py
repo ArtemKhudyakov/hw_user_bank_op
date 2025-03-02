@@ -1,5 +1,5 @@
 from typing import Collection
-from functools import wraps
+
 import pytest
 
 import src.generators as gen
@@ -61,7 +61,10 @@ def test_filter_by_currency_without_usd(
 ) -> None:
     """Тестирование функции filter_by_currency по валюте USD, тестирование
     списка транзакций, не содержащего операций в USD"""
-    assert list(gen.filter_by_currency.__wrapped__(transactions_by_rub, currency)) == []
+    assert (
+        list(gen.filter_by_currency.__wrapped__(transactions_by_rub, currency))
+        == []
+    )
 
 
 def test_filter_by_currency_eur(
@@ -70,7 +73,12 @@ def test_filter_by_currency_eur(
 ) -> None:
     """Тестирование функции filter_by_currency по валюте EUR, тестирование
     списка транзакций, не содержащего операций в EUR"""
-    assert list(gen.filter_by_currency.__wrapped__(list_of_transactions, currency)) == []
+    assert (
+        list(
+            gen.filter_by_currency.__wrapped__(list_of_transactions, currency)
+        )
+        == []
+    )
 
 
 def test_transaction_descriptions(
@@ -78,7 +86,9 @@ def test_transaction_descriptions(
 ) -> None:
     """Тестирование функции transaction_descriptions,
     тестирование через next"""
-    description = gen.transaction_descriptions.__wrapped__(list_of_transactions)
+    description = gen.transaction_descriptions.__wrapped__(
+        list_of_transactions
+    )
     assert next(description) == "Перевод организации"
     assert next(description) == "Перевод со счета на счет"
     assert next(description) == "Перевод со счета на счет"
@@ -90,7 +100,9 @@ def test_transaction_descriptions_empty(transactions: list = []) -> None:
     """Тестирование функции transaction_descriptions, если список транзакций
     пуст"""
     with pytest.raises(ValueError):
-        assert next(gen.transaction_descriptions.__wrapped__(transactions)) == ""
+        assert (
+            next(gen.transaction_descriptions.__wrapped__(transactions)) == ""
+        )
 
 
 def test_transaction_descriptions_with_filter_rub(
@@ -99,7 +111,9 @@ def test_transaction_descriptions_with_filter_rub(
     """Тестирование функции transaction_descriptions, после фильтрации
     по валюте RUB"""
     filtered = gen.filter_by_currency.__wrapped__(list_of_transactions, "RUB")
-    filtered_descriptions = gen.transaction_descriptions.__wrapped__(list(filtered))
+    filtered_descriptions = gen.transaction_descriptions.__wrapped__(
+        list(filtered)
+    )
     assert list(filtered_descriptions) == [
         "Перевод со счета на счет",
         "Перевод организации",
@@ -112,7 +126,9 @@ def test_transaction_descriptions_with_filter_eur(
     """Тестирование функции transaction_descriptions, после фильтрации
     по валюте EUR, если в отфильтрованном списке нет операций"""
     filtered = gen.filter_by_currency.__wrapped__(list_of_transactions, "EUR")
-    filtered_descriptions = gen.transaction_descriptions.__wrapped__(list(filtered))
+    filtered_descriptions = gen.transaction_descriptions.__wrapped__(
+        list(filtered)
+    )
     with pytest.raises(ValueError):
         assert list(filtered_descriptions)
 

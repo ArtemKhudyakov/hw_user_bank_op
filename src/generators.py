@@ -1,5 +1,7 @@
 from typing import Any, Collection, Iterator
+
 import src.decorators as decorators
+
 # from typing import TypeGuard
 # from typing import Any
 
@@ -66,7 +68,7 @@ import src.decorators as decorators
 #         "to": "Счет 14211924144426031657",
 #     },
 # ]
-@decorators.log('logs/my_log.txt')
+@decorators.log("logs/my_log.txt")
 def filter_by_currency(
     transactions: list[dict[str, Collection[str]]], currency: str = "USD"
 ) -> Iterator[dict[str, Collection]]:
@@ -84,7 +86,8 @@ def filter_by_currency(
         for transaction in filtered_transaction:
             yield transaction
 
-@decorators.log('logs/my_log.txt')
+
+@decorators.log("logs/my_log.txt")
 def transaction_descriptions(
     transactions: list[dict[str, Collection[str]]],
 ) -> Iterator[Collection[str]]:
@@ -96,7 +99,8 @@ def transaction_descriptions(
         for i in range(len(transactions)):
             yield transactions[i]["description"]
 
-@decorators.log('logs/my_log.txt')
+
+@decorators.log("logs/my_log.txt")
 def card_number_generator(
     start: int = 1, stop: int = 9999999999999998
 ) -> Iterator[str]:

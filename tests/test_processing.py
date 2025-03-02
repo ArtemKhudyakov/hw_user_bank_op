@@ -15,7 +15,8 @@ def test_filter_by_state_ex(
     "date": "2019-07-03T18:35:29.512364"}.
     Фильтрация по состоянию "EXECUTED" """
     assert (
-        proc.filter_by_state.__wrapped__(parent_test_data) == filtered_test_data_executed
+        proc.filter_by_state.__wrapped__(parent_test_data)
+        == filtered_test_data_executed
     )
 
 
@@ -79,7 +80,8 @@ def test_sort_by_date_desc(
     происходит по убыванию, т.е. последняя операция выводится первой.
     Тестирование убывающей сортировки"""
     assert (
-        proc.sort_by_date.__wrapped__(parent_test_data) == sorted_by_date_data_descending
+        proc.sort_by_date.__wrapped__(parent_test_data)
+        == sorted_by_date_data_descending
     )
 
 
