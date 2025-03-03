@@ -1,3 +1,7 @@
+import src.decorators as decorators
+
+
+@decorators.log("logs/my_log.txt")
 def mask_account_card(input_data: str) -> str:
     """Функция принимает номер счет в формате
     "Счет 73654108430135874305" или номер карты в формате
@@ -11,7 +15,7 @@ def mask_account_card(input_data: str) -> str:
 
     if len(splited_input_data) > 0:
         if len(splited_input_data[-1]) == 20:
-            masked_acc: str = src.masks.get_mask_account(
+            masked_acc: str = src.masks.get_mask_account.__wrapped__(
                 splited_input_data[-1]
             )
             splited_masked_acc: list = [
@@ -21,7 +25,7 @@ def mask_account_card(input_data: str) -> str:
             return " ".join(splited_masked_acc)
 
         elif len(splited_input_data[-1]) == 16:
-            masked_card: str = src.masks.get_mask_card_number(
+            masked_card: str = src.masks.get_mask_card_number.__wrapped__(
                 splited_input_data[-1]
             )
             splited_masked_card: list = [
@@ -36,6 +40,7 @@ def mask_account_card(input_data: str) -> str:
         raise ValueError("Input error")
 
 
+@decorators.log("logs/my_log.txt")
 def get_date(date: str) -> str | None:
     """Функция принимает дату в формате "2024-03-11T02:26:18.671407"
     и возвращает дату в формате "ДД.ММ.ГГГГ" ("11.03.2024")."""

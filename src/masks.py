@@ -1,3 +1,7 @@
+import src.decorators as decorators
+
+
+@decorators.log("logs/my_log.txt")
 def get_mask_card_number(card_number: str) -> str:
     """Функция принимает номер банковской карты в виде строки без пробелов,
     возвращает маскированный номер карты в формате XXXX XX** **** XXXX"""
@@ -20,6 +24,7 @@ def get_mask_card_number(card_number: str) -> str:
     return masked_card_number
 
 
+@decorators.log("logs/my_log.txt")
 def get_mask_account(acc_number: str) -> str:
     """Функция принимает на вход номер счета в виде строки и возвращает его
     маску. Номер счета замаскирован и отображается в формате **XXXX,

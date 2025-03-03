@@ -10,51 +10,51 @@ import src.generators as gen
 # print(masked_card_number)
 # print(masked_acc_number)
 # print()
-#
-# data = [
-#     "Maestro 1596837868705199",
-#     "Счет 64686473678894779589",
-#     "MasterCard 7158300734726758",
-#     "Счет 35383033474447895560",
-#     "Visa Classic 6831982476737658",
-#     "Visa Platinum 8990922113665229",
-#     "Visa Gold 5999414228426353",
-#     "Счет 73654108430135874305",
-#     "Visa Gold 5999414228426",
-#     "fdsf",
-#     "",
-# ]
-#
-# dates = [
-#     "2024-03-11T02:26:18.671407",
-#     "2025-12-11T02:26:18.671407",
-#     "",
-#     "Error",
-# ]
-#
-# operations_data = [
-#     {
-#         "id": "41428829",
-#         "state": "EXECUTED",
-#         "date": "2019-07-03T18:35:29.512364",
-#     },
-#     {
-#         "id": "939719570",
-#         "state": "EXECUTED",
-#         "date": "2018-06-30T02:08:58.425572",
-#     },
-#     {
-#         "id": "594226727",
-#         "state": "CANCELED",
-#         "date": "2018-09-12T21:27:25.241689",
-#     },
-#     {
-#         "id": "615064591",
-#         "state": "CANCELED",
-#         "date": "2018-10-14T08:21:33.419441",
-#     },
-# ]
-#
+
+data = [
+    "Maestro 1596837868705199",
+    "Счет 64686473678894779589",
+    "MasterCard 7158300734726758",
+    "Счет 35383033474447895560",
+    "Visa Classic 6831982476737658",
+    "Visa Platinum 8990922113665229",
+    "Visa Gold 5999414228426353",
+    "Счет 73654108430135874305",
+    "Visa Gold 5999414228426",
+    "fdsf",
+    "",
+]
+
+dates = [
+    "2024-03-11T02:26:18.671407",
+    "2025-12-11T02:26:18.671407",
+    "",
+    "Error",
+]
+
+operations_data = [
+    {
+        "id": "41428829",
+        "state": "EXECUTED",
+        "date": "2019-07-03T18:35:29.512364",
+    },
+    {
+        "id": "939719570",
+        "state": "EXECUTED",
+        "date": "2018-06-30T02:08:58.425572",
+    },
+    {
+        "id": "594226727",
+        "state": "CANCELED",
+        "date": "2018-09-12T21:27:25.241689",
+    },
+    {
+        "id": "615064591",
+        "state": "CANCELED",
+        "date": "2018-10-14T08:21:33.419441",
+    },
+]
+
 transactions = [
     {
         "id": "939719570",
@@ -118,13 +118,13 @@ transactions = [
     },
 ]
 
-#
+
 # for number in data:
 #     try:
 #         print(src.widjet.mask_account_card(number))
 #     except ValueError:
 #         print("Input error")
-#
+
 # print()
 # for date in dates:
 #     try:
@@ -158,44 +158,44 @@ transactions = [
 
 
 currency = input("Введите валюту для фильтрации (RUB, USD, EUR)").upper()
-
-print("Проверка filter_by_currency")
-try:
-    usd_transactions = gen.filter_by_currency(transactions, currency)
-    if not list(usd_transactions):
-        print("Транзакции в данной валюте не производились")
-    else:
-        usd_transactions = gen.filter_by_currency(transactions, currency)
-        print(list(usd_transactions))
-except ValueError:
-    print("Список транзакций пуст")
-
-print("####")
-print("Проверка filter_by_currency, если список пустой")
-
-try:
-    usd_transactions = gen.filter_by_currency([])
-    if not list(usd_transactions):
-        print("Транзакции в данной валюте не производились")
-    else:
-        usd_transactions = gen.filter_by_currency([])
-        print(list(usd_transactions))
-except ValueError:
-    print("Список транзакций пуст")
-
-print("#####")
-print("Проверка transaction_descriptions")
-
-try:
-    description = gen.transaction_descriptions(transactions)
-    print(next(description))
-    print(next(description))
-
-    description = gen.transaction_descriptions([])
-    print(next(description))
-except ValueError:
-    print("Список транзакций пуст")
-
+#
+# # print("Проверка filter_by_currency")
+# # try:
+# #     usd_transactions = gen.filter_by_currency(transactions, currency)
+# #     if not list(usd_transactions):
+# #         print("Транзакции в данной валюте не производились")
+# #     else:
+# #         usd_transactions = gen.filter_by_currency(transactions, currency)
+# #         print(list(usd_transactions))
+# # except ValueError:
+# #     print("Список транзакций пуст")
+# #
+# print("####")
+# print("Проверка filter_by_currency, если список пустой")
+#
+# try:
+#     usd_transactions = gen.filter_by_currency([])
+#     if not list(usd_transactions):
+#         print("Транзакции в данной валюте не производились")
+#     else:
+#         usd_transactions = gen.filter_by_currency([])
+#         print(list(usd_transactions))
+# except ValueError:
+#     print("Список транзакций пуст")
+#
+# print("#####")
+# print("Проверка transaction_descriptions")
+#
+# try:
+#     description = gen.transaction_descriptions(transactions)
+#     print(next(description))
+#     print(next(description))
+#
+#     description = gen.transaction_descriptions([])
+#     print(next(description))
+# except ValueError:
+#     print("Список транзакций пуст")
+#
 print("####")
 print(
     "Проверка transaction_descriptions после фильтрации"
@@ -203,9 +203,9 @@ print(
 )
 
 try:
-    filtered = gen.filter_by_currency(transactions, currency)
-    filtered_descriptions = gen.transaction_descriptions(list(filtered))
-    for _ in range(len(list(gen.filter_by_currency(transactions, currency)))):
+    filtered = list(gen.filter_by_currency(transactions, currency))
+    filtered_descriptions = gen.transaction_descriptions(filtered)
+    for _ in range(len(filtered)):
         print(next(filtered_descriptions))
 except StopIteration:
     print("Транзакции закончились")
@@ -213,12 +213,13 @@ except StopIteration:
 except ValueError:
     print("Список транзакций пуст")
 
-print("####")
-print("Проверка card_number_generator")
+# print("####")
+# print("Проверка card_number_generator")
 
-card_numbers = gen.card_number_generator(1, 5)
-try:
-    for i in range(10):
-        print(next(card_numbers))
-except StopIteration:
-    print("Хватит уже")
+
+# card_numbers = gen.card_number_generator(1, 10000000)
+# try:
+#     for i in range(1000000):
+#         print(next(card_numbers))
+# except StopIteration:
+#     print("Хватит уже")

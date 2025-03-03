@@ -15,7 +15,8 @@ def test_filter_by_state_ex(
     "date": "2019-07-03T18:35:29.512364"}.
     Фильтрация по состоянию "EXECUTED" """
     assert (
-        proc.filter_by_state(parent_test_data) == filtered_test_data_executed
+        proc.filter_by_state.__wrapped__(parent_test_data)
+        == filtered_test_data_executed
     )
 
 
@@ -30,7 +31,7 @@ def test_filter_by_state_canc(
     "date": "2019-07-03T18:35:29.512364"}.
     Фильтрация по состоянию "CANCELED" """
     assert (
-        proc.filter_by_state(parent_test_data, state="CANCELED")
+        proc.filter_by_state.__wrapped__(parent_test_data, state="CANCELED")
         == filtered_test_data_canceled
     )
 
@@ -62,12 +63,12 @@ def test_filter_by_state_empty(value: list, expected: None) -> None:
     Отработка ошибочного заполнения списка операций"""
     if len(value) == 0:
         with pytest.raises(ValueError):
-            assert proc.filter_by_state(value)
+            assert proc.filter_by_state.__wrapped__(value)
     elif len(value) > 0:
         for operation in value:
             if operation.get(state) == "" or operation.get(state) is None:
                 with pytest.raises(ValueError):
-                    assert proc.filter_by_state(value)
+                    assert proc.filter_by_state.__wrapped__(value)
 
 
 def test_sort_by_date_desc(
@@ -79,7 +80,8 @@ def test_sort_by_date_desc(
     происходит по убыванию, т.е. последняя операция выводится первой.
     Тестирование убывающей сортировки"""
     assert (
-        proc.sort_by_date(parent_test_data) == sorted_by_date_data_descending
+        proc.sort_by_date.__wrapped__(parent_test_data)
+        == sorted_by_date_data_descending
     )
 
 
@@ -92,6 +94,6 @@ def test_sort_by_date_asc(
     происходит по убыванию, т.е. последняя операция выводится первой.
     Тестирование восходящей сортировки"""
     assert (
-        proc.sort_by_date(parent_test_data, False)
+        proc.sort_by_date.__wrapped__(parent_test_data, False)
         == sorted_by_date_data_ascending
     )
