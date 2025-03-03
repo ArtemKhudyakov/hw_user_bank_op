@@ -1,38 +1,39 @@
 import tempfile as tmp
 import time as t
+from typing import Generator
 
 import pytest
 
 import src.decorators as decorators
 
 
-def test_dec_log_1():
+def test_dec_log_1()->None:
     """Тест, что декоратор не меняет результат функции"""
 
     @decorators.log(None)
-    def division(x=10, y=2):
+    def division(x:int=10, y:int=2)->float:
         return x / y
 
     result = division()
     assert result == 5
 
 
-def test_dec_log_error():
+def test_dec_log_error()->None:
     """Тест, что декоратор выбрасывает ошибку"""
 
     @decorators.log(None)
-    def division(x=10, y=0):
+    def division(x:int=10, y:int=0)->float:
         return x / y
 
     with pytest.raises(Exception):
         division()
 
 
-def test_dec_log_capsys(capsys):
+def test_dec_log_capsys(capsys)->None:
     """Тест, что декоратор верно записывает лог"""
 
     @decorators.log(None)
-    def hello_world():
+    def hello_world()->str:
         return "Hello, World!"
 
     start_time = t.asctime(t.localtime())
@@ -53,12 +54,12 @@ def test_dec_log_capsys(capsys):
     assert captured_text.split("\n")[:-3] == log.split("\n")
 
 
-def test_dec_log_into_file():
+def test_dec_log_into_file()->None:
     """Тест, что декоратор записывает лог в указанный файл"""
     with tmp.TemporaryDirectory() as tmp_dir:
 
         @decorators.log(f"{tmp_dir}/test_log_tmp.txt")
-        def hello_world():
+        def hello_world()->str:
             return "Hello, World!"
 
         hello_world()

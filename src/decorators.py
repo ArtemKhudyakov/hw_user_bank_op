@@ -5,12 +5,12 @@ from typing import Any, Callable, Optional, TypeVar
 F = TypeVar("F", bound=Callable[..., Any])
 
 
-def log(file_name: Optional[str] = None) -> Callable[[F], F]:
+def log(file_name: Optional[str] = None) -> Callable[..., Any]:
     """Декоратор log, который регистрирует детали выполнения функций, такие
     как время вызова, имя функции, передаваемые аргументы, результат выполнения и
     информация об ошибках, время, затраченное на выполнение функции."""
 
-    def decorator(func: F) -> F:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             start_message = []
