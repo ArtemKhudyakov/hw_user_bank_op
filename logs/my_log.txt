@@ -70,3 +70,19 @@ Inputs: ([],), {}Время Завершения transaction_descriptionsSun Mar
 Ошибка: ValueError
 Inputs: ([],), {}Время Завершения transaction_descriptionsSun Mar  2 21:11:29 2025
 Время выполнения 2.0742416381835938e-05
+
+        ##########################
+Функция filter_by_currency
+Время начала выполнения Mon Mar  3 21:48:38 2025
+Функция filter_by_currency успешно выполнена.
+Результат: [{'id': '873106923', 'state': 'EXECUTED', 'date': '2019-03-23T01:09:46.296404', 'operationAmount': {'amount': '43318.34', 'currency': {'name': 'руб.', 'code': 'RUB'}}, 'description': 'Перевод со счета на счет', 'from': 'Счет 44812258784861134719', 'to': 'Счет 74489636417521191160'}, {'id': '594226727', 'state': 'CANCELED', 'date': '2018-09-12T21:27:25.241689', 'operationAmount': {'amount': '67314.70', 'currency': {'name': 'руб.', 'code': 'RUB'}}, 'description': 'Перевод организации', 'from': 'Visa Platinum 1246377376343588', 'to': 'Счет 14211924144426031657'}]
+Время Завершения filter_by_currency Mon Mar  3 21:48:38 2025
+Время выполнения 9.083747863769531e-05
+
+        ##########################
+Функция transaction_descriptions
+Время начала выполнения Mon Mar  3 21:48:38 2025
+Функция transaction_descriptions успешно выполнена.
+Результат: ['Перевод со счета на счет', 'Перевод организации']
+Время Завершения transaction_descriptions Mon Mar  3 21:48:38 2025
+Время выполнения 4.029273986816406e-05

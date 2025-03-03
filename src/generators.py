@@ -1,15 +1,14 @@
-from typing import Any, Collection, Iterator
+from typing import Any, Collection, Generator, Iterator, TypeGuard
 
 import src.decorators as decorators
-
-# from typing import TypeGuard
-# from typing import Any
 
 
 @decorators.log("logs/my_log.txt")
 def filter_by_currency(
-    transactions: list[dict[str, Collection[str]]], currency: str = "USD"
-) -> Iterator[dict[str, Collection]]:
+    transactions: list[dict[str, Any]], currency: str = "USD"
+) -> Generator[
+    Iterator[dict[str, Any]], TypeGuard[dict[str, Collection[Any]]]
+]:
     """Функция, которая принимает на вход список словарей, представляющих
     транзакции. Функция возвращает итератор, который поочередно выдает
     транзакции, где валюта операции соответствует заданной (по умолчанию USD).
@@ -17,7 +16,7 @@ def filter_by_currency(
     if len(transactions) == 0:
         raise ValueError("Список транзакций пуст")
     else:
-        filtered_transaction: Iterator[dict[str, Collection[Any]]] = filter(
+        filtered_transaction: Iterator[Any] = filter(
             lambda x: x["operationAmount"]["currency"]["code"] == currency,
             transactions,
         )
