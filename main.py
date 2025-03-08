@@ -1,7 +1,8 @@
 # import src.masks
 # import src.processing
 # import src.widjet
-import src.generators as gen
+# import src.generators as gen
+import src.utils as utils
 
 # card_number: str = str(7000792289606361)
 # acc_number: str = str(73654108430135874305)
@@ -243,11 +244,11 @@ import src.generators as gen
 # except Exception as e:
 #     print(f"Ошибка: {e} {type(e).__name__}")
 
-import src.utils as utils
 
 tansac = utils.transactions_data()
 
-for transaction in tansac:
+if tansac:
+    for transaction in tansac:
 
-     print(transaction)
-     print()
+        print(transaction)
+        print()

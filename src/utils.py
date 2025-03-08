@@ -1,12 +1,12 @@
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, List, Optional
 
 
 def transactions_data(
     file_name: str = "operations.json",
-) -> list[dict[str, Any]]:
-    json_data = None
+) -> List[Any] | None:
+    json_data: Optional[List[Any]] = None
     current_file_path = Path(__file__).resolve()
     project_root_path = current_file_path.parent.parent
     file_path = f"{project_root_path}/data/{file_name}"
