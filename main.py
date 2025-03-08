@@ -225,30 +225,31 @@ import src.utils as utils
 # except StopIteration:
 #     print("Хватит уже")
 
-# import src.external_api as ext
+import src.external_api as ext
+from typing import Any
+
+transaction_ex:dict[str, Any] = {'id': 41428829, 'state': 'EXECUTED',
+                  'date': '2019-07-03T18:35:29.512364',
+                  'operationAmount': {'amount': '8221.37',
+                                      'currency': {'name': 'USD',
+                                                   'code': 'USD'}},
+                  'description': 'Перевод организации',
+                  'from': 'MasterCard 7158300734726758',
+                  'to': 'Счет 35383033474447895560'}
+
+try:
+    print(
+        f"{transaction_ex["operationAmount"]["amount"]} "
+        f"{transaction_ex["operationAmount"]["currency"]["code"]}\n"
+        f"{ext.convert_into_rub(transaction_ex)} руб")
+except Exception as e:
+    print(f"Ошибка: {e} {type(e).__name__}")
+
+
+# tansac = utils.transactions_data()
 #
-# transaction_ex = {'id': 41428829, 'state': 'EXECUTED',
-#                   'date': '2019-07-03T18:35:29.512364',
-#                   'operationAmount': {'amount': '8221.37',
-#                                       'currency': {'name': 'USD',
-#                                                    'code': 'USD'}},
-#                   'description': 'Перевод организации',
-#                   'from': 'MasterCard 7158300734726758',
-#                   'to': 'Счет 35383033474447895560'}
+# if tansac:
+#     for transaction in tansac:
 #
-# try:
-#     print(
-#         f"{transaction_ex["operationAmount"]["amount"]} "
-#         f"{transaction_ex["operationAmount"]["currency"]["code"]}\n"
-#         f"{ext.convert_into_rub(transaction_ex)} руб")
-# except Exception as e:
-#     print(f"Ошибка: {e} {type(e).__name__}")
-
-
-tansac = utils.transactions_data()
-
-if tansac:
-    for transaction in tansac:
-
-        print(transaction)
-        print()
+#         print(transaction)
+#         print()

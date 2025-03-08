@@ -32,8 +32,8 @@ def convert_into_rub(transaction: dict[str, Any]) -> Any:
                 "GET", url, headers=headers, data=payload
             )
             status_code = response.status_code
-            result = round(float(response.json()["result"]), 2)
             if status_code == 200:
+                result = round(float(response.json()["result"]), 2)
                 return result
             else:
                 raise Exception
