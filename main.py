@@ -2,8 +2,8 @@
 # import src.processing
 # import src.widjet
 # import src.generators as gen
-import src.utils as utils
-
+# import src.utils as utils
+#
 # card_number: str = str(7000792289606361)
 # acc_number: str = str(73654108430135874305)
 # masked_card_number: str = src.masks.get_mask_card_number(card_number)
@@ -11,7 +11,7 @@ import src.utils as utils
 # print(masked_card_number)
 # print(masked_acc_number)
 # print()
-
+#
 # data = [
 #     "Maestro 1596837868705199",
 #     "Счет 64686473678894779589",
@@ -118,14 +118,14 @@ import src.utils as utils
 #         "to": "Счет 14211924144426031657",
 #     },
 # ]
-
-
+#
+#
 # for number in data:
 #     try:
 #         print(src.widjet.mask_account_card(number))
 #     except ValueError:
 #         print("Input error")
-
+#
 # print()
 # for date in dates:
 #     try:
@@ -156,21 +156,21 @@ import src.utils as utils
 #     print(operation)
 #
 #
-
-
+#
+#
 # currency = input("Введите валюту для фильтрации (RUB, USD, EUR)").upper()
 #
-# # print("Проверка filter_by_currency")
-# # try:
-# #     usd_transactions = gen.filter_by_currency(transactions, currency)
-# #     if not list(usd_transactions):
-# #         print("Транзакции в данной валюте не производились")
-# #     else:
-# #         usd_transactions = gen.filter_by_currency(transactions, currency)
-# #         print(list(usd_transactions))
-# # except ValueError:
-# #     print("Список транзакций пуст")
-# #
+# print("Проверка filter_by_currency")
+# try:
+#     usd_transactions = gen.filter_by_currency(transactions, currency)
+#     if not list(usd_transactions):
+#         print("Транзакции в данной валюте не производились")
+#     else:
+#         usd_transactions = gen.filter_by_currency(transactions, currency)
+#         print(list(usd_transactions))
+# except ValueError:
+#     print("Список транзакций пуст")
+#
 # print("####")
 # print("Проверка filter_by_currency, если список пустой")
 #
@@ -225,23 +225,29 @@ import src.utils as utils
 # except StopIteration:
 #     print("Хватит уже")
 
-import src.external_api as ext
 from typing import Any
 
-transaction_ex:dict[str, Any] = {'id': 41428829, 'state': 'EXECUTED',
-                  'date': '2019-07-03T18:35:29.512364',
-                  'operationAmount': {'amount': '8221.37',
-                                      'currency': {'name': 'USD',
-                                                   'code': 'USD'}},
-                  'description': 'Перевод организации',
-                  'from': 'MasterCard 7158300734726758',
-                  'to': 'Счет 35383033474447895560'}
+import src.external_api as ext
+
+transaction_ex: dict[str, Any] = {
+    "id": 41428829,
+    "state": "EXECUTED",
+    "date": "2019-07-03T18:35:29.512364",
+    "operationAmount": {
+        "amount": "8221.37",
+        "currency": {"name": "USD", "code": "USD"},
+    },
+    "description": "Перевод организации",
+    "from": "MasterCard 7158300734726758",
+    "to": "Счет 35383033474447895560",
+}
 
 try:
     print(
         f"{transaction_ex["operationAmount"]["amount"]} "
         f"{transaction_ex["operationAmount"]["currency"]["code"]}\n"
-        f"{ext.convert_into_rub(transaction_ex)} руб")
+        f"{ext.convert_into_rub(transaction_ex)} руб"
+    )
 except Exception as e:
     print(f"Ошибка: {e} {type(e).__name__}")
 
