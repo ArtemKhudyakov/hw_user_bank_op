@@ -6,9 +6,10 @@ from dotenv import load_dotenv
 
 
 def convert_into_rub(transaction: dict[str, Any]) -> Any:
-    """Функция принимает на вход путь до JSON-файла и возвращает список
-    словарей с данными о финансовых транзакциях. Если файл пустой, содержит
-    не список или не найден, функция возвращает пустой список."""
+    """Функция конвертации валюты из USD и EUR в рубли принимает на вход
+    словарь с данными о транзакции и возвращает сумму транзакции (ключ amount)
+    в рублях, тип данных float. Функция обращается к внешнему сервису
+    apilayer.com"""
     if transaction:
         if transaction["operationAmount"]["currency"]["code"] == "RUB":
             result = transaction["operationAmount"]["amount"]

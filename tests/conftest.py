@@ -1,5 +1,6 @@
-import pytest
 from typing import Any
+
+import pytest
 
 
 @pytest.fixture
@@ -249,23 +250,50 @@ def transactions_by_rub() -> list[dict[str, object]]:
         },
     ]
 
+
 @pytest.fixture
 def first_transaction_json_data() -> dict[str, Any]:
-    transaction = {'id': 441945886, 'state': 'EXECUTED',
-                   'date': '2019-08-26T10:50:58.294041',
-                   'operationAmount': {'amount': '31957.58',
-                                       'currency': {'name': 'руб.',
-                                                    'code': 'RUB'}},
-                   'description': 'Перевод организации',
-                   'from': 'Maestro 1596837868705199',
-                   'to': 'Счет 64686473678894779589'}
+    transaction = {
+        "id": 441945886,
+        "state": "EXECUTED",
+        "date": "2019-08-26T10:50:58.294041",
+        "operationAmount": {
+            "amount": "31957.58",
+            "currency": {"name": "руб.", "code": "RUB"},
+        },
+        "description": "Перевод организации",
+        "from": "Maestro 1596837868705199",
+        "to": "Счет 64686473678894779589",
+    }
     return transaction
 
 
-
-    # current_file_path = Path(__file__).resolve()
-    # project_root_path = current_file_path.parent.parent
-    # file_path = f"{project_root_path}/data/operations.json"
-    # with open(file_path, "r", encoding="utf-8") as f:
-    #     return json.load(f)
-
+@pytest.fixture
+def two_transactions_json_data() -> list[dict[str, Any]]:
+    transactions = [
+        {
+            "id": 441945886,
+            "state": "EXECUTED",
+            "date": "2019-08-26T10:50:58.294041",
+            "operationAmount": {
+                "amount": "31957.58",
+                "currency": {"name": "руб.", "code": "RUB"},
+            },
+            "description": "Перевод организации",
+            "from": "Maestro 1596837868705199",
+            "to": "Счет 64686473678894779589",
+        },
+        {
+            "id": 41428829,
+            "state": "EXECUTED",
+            "date": "2019-07-03T18:35:29.512364",
+            "operationAmount": {
+                "amount": "8221.37",
+                "currency": {"name": "USD", "code": "USD"},
+            },
+            "description": "Перевод организации",
+            "from": "MasterCard 7158300734726758",
+            "to": "Счет 35383033474447895560",
+        },
+    ]
+    return transactions
