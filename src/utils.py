@@ -4,12 +4,15 @@ from typing import Any, List, Optional
 
 
 def transactions_data(
-    file_name: str = "operations.json",
-) -> List[Any] | None:
+    path_to_json_file:str = "data/operations.json",
+) -> Optional[List[Any]]:
+    """Функция принимает на вход относительный путь до JSON-файла и возвращает
+список словарей с данными о финансовых транзакциях. Если файл пустой, содержит
+не список или не найден, функция возвращает пустой список."""
     json_data: Optional[List[Any]] = None
     current_file_path = Path(__file__).resolve()
     project_root_path = current_file_path.parent.parent
-    file_path = f"{project_root_path}/data/{file_name}"
+    file_path = f"{project_root_path}/{path_to_json_file}"
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             json_data = json.load(f)
@@ -17,11 +20,3 @@ def transactions_data(
         json_data = []
     finally:
         return json_data
-
-
-# tansac = transactions_data()
-# print(tansac)
-# for transaction in tansac:
-#
-#     print(transaction)
-#     print()
