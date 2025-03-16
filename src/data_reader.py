@@ -13,17 +13,17 @@ def csv_reader(
     current_file_path = p.Path(__file__).resolve()
     project_root_path = current_file_path.parent.parent
     file_path = f"{project_root_path}/{path_to_csv_file}"
-    data_list = []
     try:
         with open(file_path, "r", encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile, delimiter=";")
             data_list = list(reader)
+            return data_list
 
     except FileNotFoundError:
         print("File not found")
         raise FileNotFoundError
-    finally:
-        return data_list
+    # finally:
+    #     return data_list
 
 
 def xlsx_reader(
@@ -34,12 +34,12 @@ def xlsx_reader(
     current_file_path = p.Path(__file__).resolve()
     project_root_path = current_file_path.parent.parent
     file_path = f"{project_root_path}/{path_to_xlsx_file}"
-    data_list: List[Dict[Hashable, Any]] = []
     try:
         excel_data = pd.read_excel(file_path)
         data_list = excel_data.to_dict(orient="records")
+        return data_list
     except FileNotFoundError:
         print("File not found")
         raise FileNotFoundError
-    finally:
-        return data_list
+    # finally:
+    #     return data_list
