@@ -22,8 +22,6 @@ def csv_reader(
     except FileNotFoundError:
         print("File not found")
         raise FileNotFoundError
-    # finally:
-    #     return data_list
 
 
 def xlsx_reader(
@@ -41,5 +39,3 @@ def xlsx_reader(
     except FileNotFoundError:
         print("File not found")
         raise FileNotFoundError
-    # finally:
-    #     return data_list
