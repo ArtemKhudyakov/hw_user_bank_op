@@ -1,4 +1,4 @@
-import src.masks
+# import src.masks
 
 # import src.generators as gen
 # import src.utils as utils
@@ -6,13 +6,13 @@ import src.masks
 # import src.widjet
 
 #
-card_number: str = str(7000792289606361)
-acc_number: str = str(73654108430135874305)
-masked_card_number: str = src.masks.get_mask_card_number(card_number)
-masked_acc_number: str = src.masks.get_mask_account(acc_number)
-print(masked_card_number)
-print(masked_acc_number)
-print()
+# card_number: str = str(7000792289606361)
+# acc_number: str = str(73654108430135874305)
+# masked_card_number: str = src.masks.get_mask_card_number(card_number)
+# masked_acc_number: str = src.masks.get_mask_account(acc_number)
+# print(masked_card_number)
+# print(masked_acc_number)
+# print()
 #
 # data = [
 #     "Maestro 1596837868705199",
@@ -261,3 +261,19 @@ print()
 #
 #         print(transaction)
 #         print()
+
+# import src.data_reader as dr
+
+#
+# data = dr.csv_reader("data/transaction.csv")
+# for row in data:
+#     print(row)
+
+# data = dr.xlsx_reader()
+# for i in range(0, 2):
+#     print(f"{i}--->{data[i]}")
+
+
+# for i, row in enumerate(data):
+#     if i < 2:
+#         print(i, row)
