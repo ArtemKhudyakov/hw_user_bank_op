@@ -1,16 +1,18 @@
-# import src.masks
-# import src.processing
-# import src.widjet
+import src.masks
+
 # import src.generators as gen
 # import src.utils as utils
+# import src.processing
+# import src.widjet
+
 #
-# card_number: str = str(7000792289606361)
-# acc_number: str = str(73654108430135874305)
-# masked_card_number: str = src.masks.get_mask_card_number(card_number)
-# masked_acc_number: str = src.masks.get_mask_account(acc_number)
-# print(masked_card_number)
-# print(masked_acc_number)
-# print()
+card_number: str = str(7000792289606361)
+acc_number: str = str(73654108430135874305)
+masked_card_number: str = src.masks.get_mask_card_number(card_number)
+masked_acc_number: str = src.masks.get_mask_account(acc_number)
+print(masked_card_number)
+print(masked_acc_number)
+print()
 #
 # data = [
 #     "Maestro 1596837868705199",
@@ -225,34 +227,34 @@
 # except StopIteration:
 #     print("Хватит уже")
 
-from typing import Any
+# from typing import Any
 
-import src.external_api as ext
+# import src.external_api as ext
 
-transaction_ex: dict[str, Any] = {
-    "id": 41428829,
-    "state": "EXECUTED",
-    "date": "2019-07-03T18:35:29.512364",
-    "operationAmount": {
-        "amount": "8221.37",
-        "currency": {"name": "USD", "code": "USD"},
-    },
-    "description": "Перевод организации",
-    "from": "MasterCard 7158300734726758",
-    "to": "Счет 35383033474447895560",
-}
+# transaction_ex: dict[str, Any] = {
+#     "id": 41428829,
+#     "state": "EXECUTED",
+#     "date": "2019-07-03T18:35:29.512364",
+#     "operationAmount": {
+#         "amount": "8221.37",
+#         "currency": {"name": "USD", "code": "USD"},
+#     },
+#     "description": "Перевод организации",
+#     "from": "MasterCard 7158300734726758",
+#     "to": "Счет 35383033474447895560",
+# }
+#
+# try:
+#     print(
+#         f"{transaction_ex["operationAmount"]["amount"]} "
+#         f"{transaction_ex["operationAmount"]["currency"]["code"]}\n"
+#         f"{ext.convert_into_rub(transaction_ex)} руб"
+#     )
+# except Exception as e:
+#     print(f"Ошибка: {e} {type(e).__name__}")
 
-try:
-    print(
-        f"{transaction_ex["operationAmount"]["amount"]} "
-        f"{transaction_ex["operationAmount"]["currency"]["code"]}\n"
-        f"{ext.convert_into_rub(transaction_ex)} руб"
-    )
-except Exception as e:
-    print(f"Ошибка: {e} {type(e).__name__}")
 
-
-# tansac = utils.transactions_data()
+# tansac = utils.transactions_data('data/operations.json')
 #
 # if tansac:
 #     for transaction in tansac:
