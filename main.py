@@ -263,15 +263,16 @@
 #         print()
 
 # import src.data_reader as dr
+
 #
 # data = dr.csv_reader("data/transactions.csv")
 # for row in data:
 #     print(row)
 
-# data = dr.xlsx_reader("data/transaction_excel.xlsx")
+# data = dr.xlsx_reader("data/transactions_excel.xlsx")
 # for i in range(0, 2):
 #     print(f"{i}--->{data[i]}")
-#
+
 #
 # for i, row in enumerate(data):
 #     if i <= 2:
