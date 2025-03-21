@@ -1,6 +1,6 @@
 import re
 from collections import Counter
-
+from typing import List, Dict, Any, Hashable
 
 from src.data_reader import xlsx_reader
 
@@ -43,8 +43,8 @@ operations_list = xlsx_reader("data/transactions_excel.xlsx")
 
 
 def op_searching_by_description(
-    string_for_searching: str, operations_list: list[dict[str, str]]
-) -> list[dict[str, str]]:
+    string_for_searching: str, operations_list: List[Dict[str, Any]]
+) -> List[Dict[str, Any]]:
     """Принимает список словарей с данными о банковских операциях и строку
     поиска, а возвращать список словарей, у которых в описании есть данная
     строка."""
@@ -65,8 +65,8 @@ srch_categories_list = ["ОткрытиЕ Вклада", "ПЕРЕВОД с ка
 
 
 def op_counter_by_category(
-    operations_list: list[dict[str, str]], srch_categories_list
-):
+    operations_list: List[Dict[Hashable, Any]], srch_categories_list: List[str]
+)->Dict[str, Any]:
     srch_counter = dict()
     op_category_list = [
         operation["description"] for operation in operations_list
@@ -74,7 +74,7 @@ def op_counter_by_category(
     category_counter = Counter(op_category_list)
 
     for i in srch_categories_list:
-        if i.capitalize() in list(category_counter.keys()):
+        if str(i.capitalize()) in list(category_counter.keys()):
             srch_counter[i.capitalize()] = category_counter[i.capitalize()]
         else:
             srch_counter[i] = "Операция не найдена"
