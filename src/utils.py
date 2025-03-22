@@ -6,7 +6,6 @@ from typing import Any, List, Optional
 current_file_path = Path(__file__).resolve()
 project_root_path = current_file_path.parent.parent
 
-
 logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
 file_handler = logging.FileHandler(
@@ -25,7 +24,7 @@ def transactions_data(
     """Функция принимает на вход относительный путь до JSON-файла и возвращает
     список словарей с данными о финансовых транзакциях. Если файл пустой,
     содержит не список или не найден, функция возвращает пустой список."""
-    json_data: Optional[List[Any]] = None
+    json_data: Optional[List[Any]] | None = None
     current_file_path = Path(__file__).resolve()
     project_root_path = current_file_path.parent.parent
     file_path = f"{project_root_path}/{path_to_json_file}"

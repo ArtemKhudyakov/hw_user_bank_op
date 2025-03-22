@@ -1,45 +1,6 @@
 import re
 from collections import Counter
-from typing import List, Dict, Any, Hashable
-
-from src.data_reader import xlsx_reader
-
-operations_list = xlsx_reader("data/transactions_excel.xlsx")
-#     [
-#     {
-#         "id": 650703.0,
-#         "state": "EXECUTED",
-#         "date": "2023-09-05T11:30:32Z",
-#         "amount": 16210.0,
-#         "currency_name": "Sol",
-#         "currency_code": "PEN",
-#         "from": "Счет 58803664561298323391",
-#         "to": "Счет 39745660563456619397",
-#         "description": "Перевод организации",
-#     },
-#     {
-#         "id": 3598919.0,
-#         "state": "EXECUTED",
-#         "date": "2020-12-06T23:00:58Z",
-#         "amount": 29740.0,
-#         "currency_name": "Peso",
-#         "currency_code": "COP",
-#         "from": "Discover 3172601889670065",
-#         "to": "Discover 0720428384694643",
-#         "description": "Перевод с карты на карту",
-#     },
-#     {
-#         "id": 593027.0,
-#         "state": "CANCELED",
-#         "date": "2023-07-22T05:02:01Z",
-#         "amount": 30368.0,
-#         "currency_name": "Shilling",
-#         "currency_code": "TZS",
-#         "from": "Visa 1959232722494097",
-#         "to": "Visa 6804119550473710",
-#         "description": "Перевод с карты на карту",
-#     },
-# ]
+from typing import Any, Dict, List
 
 
 def op_searching_by_description(
@@ -58,28 +19,24 @@ def op_searching_by_description(
     return operations_by_description
 
 
-srch_categories_list = ["ОткрытиЕ Вклада", "ПЕРЕВОД с карты на карту", "перевод организации", "апапа"]
-"""Функция принимает список словарей с данными о банковских операциях и
-список категорий операций, возвращать словарь, в котором ключи — это названия
-категорий, а значения — это количество операций в каждой категории."""
-
-
 def op_counter_by_category(
-    operations_list: List[Dict[Hashable, Any]], srch_categories_list: List[str]
-)->Dict[str, Any]:
-    srch_counter = dict()
-    op_category_list = [
-        operation["description"] for operation in operations_list
+    operations_list: List[Dict[str, Any]], srch_categories_list: List[str]
+) -> Dict[str, Any]:
+    """Функция принимает список словарей с данными о банковских операциях и
+    список категорий операций, возвращать словарь, в котором ключи — это
+    названия категорий, а значения — это количество операций в каждой
+    категории."""
+    srch_counter: Dict[str, Any] = {}
+    op_category_list: List[str] = [
+        str(operation["description"]).capitalize()
+        for operation in operations_list
     ]
-    category_counter = Counter(op_category_list)
+    category_counter: Counter[str] = Counter(op_category_list)
 
     for i in srch_categories_list:
         if str(i.capitalize()) in list(category_counter.keys()):
             srch_counter[i.capitalize()] = category_counter[i.capitalize()]
         else:
-            srch_counter[i] = "Операция не найдена"
+            srch_counter[i] = 0
 
     return srch_counter
-
-
-print(op_counter_by_category(operations_list, srch_categories_list))
