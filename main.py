@@ -168,42 +168,48 @@ EXECUTED, CANCELED, PENDING
                             f"{operation["description"]}"
                         )
                         if start_choice == "1":
+                            amount = operation["operationAmount"]["amount"]
+                            currency = operation["operationAmount"][
+                                "currency"
+                            ]["code"]
                             if operation.get("from"):
+                                from_card_numb = widjet.mask_account_card(
+                                    operation["from"]
+                                )
+                                to_card_numb = widjet.mask_account_card(
+                                    operation["to"]
+                                )
                                 print(
-                                    f"{widjet.mask_account_card(operation
-                                                                ["from"])} "
-                                    f"--> {widjet.mask_account_card(operation
-                                                                    ["to"])}"
+                                    f"{from_card_numb} " f"--> {to_card_numb} "
                                 )
                             else:
-                                print(
-                                    f"{widjet.mask_account_card(operation
-                                                                ["to"])}"
+                                to_card_numb = widjet.mask_account_card(
+                                    operation["to"]
                                 )
-                            print(
-                                f"Сумма:{operation["operationAmount"]["amount"]}"
-                                f" {operation["operationAmount"]["currency"]["code"]}"
-                            )
+                                print(f"{to_card_numb} ")
+                            print(f"Сумма:{amount}" f" {currency}")
                         else:
+                            amount = operation["amount"]
+                            currency = operation["currency_code"]
                             if (
                                 str(operation["from"]) == "nan"
                                 or operation["from"] == ""
                             ):
-                                print(
-                                    f"{widjet.mask_account_card(operation
-                                                                ["to"])}"
+                                to_card_numb = widjet.mask_account_card(
+                                    operation["to"]
                                 )
+                                print(f"{to_card_numb} ")
                             else:
-                                print(
-                                    f"{widjet.mask_account_card(operation
-                                                                ["from"])} "
-                                    f"--> {widjet.mask_account_card(operation
-                                                                    ["to"])}"
+                                from_card_numb = widjet.mask_account_card(
+                                    operation["from"]
                                 )
-                            print(
-                                f"Сумма: {operation["amount"]} "
-                                f"{operation["currency_code"]}"
-                            )
+                                to_card_numb = widjet.mask_account_card(
+                                    operation["to"]
+                                )
+                                print(
+                                    f"{from_card_numb} " f"--> {to_card_numb} "
+                                )
+                            print(f"Сумма: {amount} " f"{currency}")
                 continue_or_not = input(
                     """
 Для выхода из программы введите "q"
