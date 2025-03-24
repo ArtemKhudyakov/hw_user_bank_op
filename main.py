@@ -8,8 +8,8 @@ import src.widjet as widjet
 
 def main() -> None:
     print(
-        "\nПривет! Добро пожаловать в программу работы с "
-        "банковскими транзакциями."
+        '\nПривет! Добро пожаловать в программу работы с '
+        'банковскими транзакциями.'
     )
     operations_list: list | None = []
     filtered_operations_list: list = []
@@ -29,21 +29,21 @@ def main() -> None:
             exit()
 
         elif start_choice not in ["1", "2", "3"]:
-            print("Операция не распознана")
+            print('Операция не распознана')
             continue
 
         else:
             if start_choice == "1":
-                print("Для обработки выбран JSON-файл.")
+                print('Для обработки выбран JSON-файл.')
                 operations_list = utils.transactions_data()
 
             elif start_choice == "2":
 
-                print("Для обработки выбран CSV-файл.")
+                print('Для обработки выбран CSV-файл.')
                 operations_list = data_reader.csv_reader()
 
             elif start_choice == "3":
-                print("Для обработки выбран XLSX-файл.")
+                print('Для обработки выбран XLSX-файл.')
                 operations_list = data_reader.xlsx_reader()
 
         while True:
@@ -80,8 +80,8 @@ EXECUTED, CANCELED, PENDING
                 ).capitalize()
 
                 if sort_choice == "Y":
-                    print("\nВыбрана сортировка по дате\n")
-                    print("Отсортировать по возрастанию или по убыванию?")
+                    print('\nВыбрана сортировка по дате\n')
+                    print('Отсортировать по возрастанию или по убыванию?')
                     upscending_descending_choice = input(
                         """
 Для сортировки по возрастанию введите 1
@@ -97,7 +97,7 @@ EXECUTED, CANCELED, PENDING
                             filtered_operations_list
                         )
                 else:
-                    print("\nБез сортировки по дате\n")
+                    print('\nБез сортировки по дате\n')
                     sorted_filtered_op = filtered_operations_list
 
             currency_filter = input(
@@ -151,21 +151,21 @@ EXECUTED, CANCELED, PENDING
                     )
                 else:
                     filtered_by_word = sorted_by_currency
-                print("\nРаспечатываю итоговый список транзакций...")
+                print('\nРаспечатываю итоговый список транзакций...')
                 if len(filtered_by_word) == 0:
                     print(
-                        "\nНе найдено ни одной транзакции, "
-                        "подходящей под ваши условия фильтрации"
+                        '\nНе найдено ни одной транзакции, '
+                        'подходящей под ваши условия фильтрации'
                     )
                 else:
                     print(
-                        f"\nВсего банковских операций в выборке: "
-                        f"{len(filtered_by_word)}"
+                        f'\nВсего банковских операций в выборке: '
+                        f'{len(filtered_by_word)}'
                     )
                     for operation in filtered_by_word:
                         print(
-                            f"\n{widjet.get_date(operation["date"])} "
-                            f"{operation["description"]}"
+                            f'\n{widjet.get_date(operation["date"])} '
+                            f'{operation["description"]}'
                         )
                         if start_choice == "1":
                             amount = operation["operationAmount"]["amount"]
@@ -187,7 +187,7 @@ EXECUTED, CANCELED, PENDING
                                     operation["to"]
                                 )
                                 print(f"{to_card_numb} ")
-                            print(f"Сумма:{amount}" f" {currency}")
+                            print(f"Сумма:{amount} {currency}")
                         else:
                             amount = operation["amount"]
                             currency = operation["currency_code"]
@@ -207,9 +207,9 @@ EXECUTED, CANCELED, PENDING
                                     operation["to"]
                                 )
                                 print(
-                                    f"{from_card_numb} " f"--> {to_card_numb} "
+                                    f"{from_card_numb} --> {to_card_numb} "
                                 )
-                            print(f"Сумма: {amount} " f"{currency}")
+                            print(f"Сумма: {amount} {currency}")
                 continue_or_not = input(
                     """
 Для выхода из программы введите "q"
