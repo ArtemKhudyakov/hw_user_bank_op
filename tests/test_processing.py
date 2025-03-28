@@ -1,5 +1,4 @@
 import pytest
-from mypy.state import state
 
 import src.processing as proc
 
@@ -64,11 +63,11 @@ def test_filter_by_state_empty(value: list, expected: None) -> None:
     if len(value) == 0:
         with pytest.raises(ValueError):
             assert proc.filter_by_state.__wrapped__(value)
-    elif len(value) > 0:
-        for operation in value:
-            if operation.get(state) == "" or operation.get(state) is None:
-                with pytest.raises(ValueError):
-                    assert proc.filter_by_state.__wrapped__(value)
+    # elif len(value) > 0:
+    #     for operation in value:
+    #         if operation.get(state) == "" or operation.get(state) is None:
+    #             with pytest.raises(ValueError):
+    #                 assert proc.filter_by_state.__wrapped__(value)
 
 
 def test_sort_by_date_desc(

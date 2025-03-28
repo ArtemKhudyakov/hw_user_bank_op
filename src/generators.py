@@ -16,10 +16,16 @@ def filter_by_currency(
     if len(transactions) == 0:
         raise ValueError("Список транзакций пуст")
     else:
-        filtered_transaction: Iterator[Any] = filter(
-            lambda x: x["operationAmount"]["currency"]["code"] == currency,
-            transactions,
-        )
+        if transactions[0].get("operationAmount"):
+            filtered_transaction: Iterator[Any] = filter(
+                lambda x: x["operationAmount"]["currency"]["code"] == currency,
+                transactions,
+            )
+        else:
+            filtered_transaction = filter(
+                lambda x: x["currency_code"] == currency,
+                transactions,
+            )
         for transaction in filtered_transaction:
             yield transaction
 

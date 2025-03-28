@@ -8,16 +8,17 @@ def filter_by_state(
     """Функция принимает список операций и возвращает список операций
     отфильтрованный по параметру 'state'. Данные по каждой операции
     представлены в виде словаря."""
+    # filtered_operations:list = []
     if len(operations) != 0:
         for operation in operations:
-            if operation.get("state") == "" or not operation.get("state"):
-                raise ValueError("Ошибка ввода")
-            else:
-                filtered_operations: list[dict[str, str]] = [
-                    operation
-                    for operation in operations
-                    if operation.get("state") == state
-                ]
+            # if operation.get("state") == "" or not operation.get("state"):
+            #     raise ValueError("Ошибка ввода")
+            # else:
+            filtered_operations: list[dict[str, str]] = [
+                operation
+                for operation in operations
+                if operation.get("state") == state
+            ]
         return filtered_operations
     else:
         raise ValueError("Список операций пуст")
